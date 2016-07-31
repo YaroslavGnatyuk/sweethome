@@ -22,6 +22,13 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+
+		<bootstrap.version>3.3.5</bootstrap.version>
+		<jquery.version>2.1.4</jquery.version>
+		<font-awesome.version>4.6.3</font-awesome.version>
+		<hikari.version>2.4.3</hikari.version>
+		<!--<link href="<c:url value="${pageContext.request.contextPath}/webjars/bootstrap/3.3.5/css/bootstrap.css"/>"
+		rel="stylesheet">-->
 	</properties>
 
 	<dependencies>
@@ -69,6 +76,30 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+
+		<!-- Front-End -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>${bootstrap.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery</artifactId>
+			<version>${jquery.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>font-awesome</artifactId>
+			<version>${font-awesome.version}</version>
+		</dependency>
+
+		<!--Connection pool Hikari-->
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+			<version>${hikari.version}</version>
 		</dependency>
 	</dependencies>
 
