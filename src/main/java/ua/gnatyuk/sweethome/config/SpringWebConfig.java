@@ -14,7 +14,7 @@ import org.springframework.web.servlet.view.JstlView;
  * Created by yroslav on 7/31/16.
  */
 @Configuration
-@ComponentScan("ua.skillsup.gelius")
+@ComponentScan("ua.gnatyuk.sweethome")
 @EnableWebMvc
 @Import({SpringConfig.class})
 public class SpringWebConfig extends WebMvcConfigurerAdapter {
