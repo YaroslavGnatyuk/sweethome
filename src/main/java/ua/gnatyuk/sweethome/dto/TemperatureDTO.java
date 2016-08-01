@@ -5,9 +5,6 @@ import lombok.ToString;
 
 import java.sql.Timestamp;
 
-/**
- * Created by yroslav on 8/1/16.
- */
 @ToString(exclude="id")
 @EqualsAndHashCode(exclude="id")
 public class TemperatureDTO {

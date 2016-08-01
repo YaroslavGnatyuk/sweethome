@@ -3,10 +3,8 @@ package ua.gnatyuk.sweethome.converter;
 import ua.gnatyuk.sweethome.dao.entities.Temperature;
 import ua.gnatyuk.sweethome.dto.TemperatureDTO;
 
-/**
- * Created by yroslav on 8/1/16.
- */
 public final class EntityDTOConverter {
+
     public EntityDTOConverter() {
 
     }
@@ -25,5 +23,4 @@ public final class EntityDTOConverter {
         temperatureDTO.setBarPressure(temperature.getBarPressure());
         return temperatureDTO;
     }
-
 }

@@ -3,9 +3,6 @@ package ua.gnatyuk.sweethome.dao.entities;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-/**
- * Created by yroslav on 8/1/16.
- */
 @Entity
 @Table(name = "temperature")
 public class Temperature {

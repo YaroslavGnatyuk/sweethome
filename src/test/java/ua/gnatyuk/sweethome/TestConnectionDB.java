@@ -20,7 +20,7 @@ public class TestConnectionDB {
 	SessionFactory sessionFactory;
 
 	@Test@Transactional
-	public void contextLoads() {
+	public void testConnectionToDB() {
 		BigInteger actual = (BigInteger) sessionFactory.getCurrentSession().createSQLQuery("select 1").uniqueResult();
 		BigInteger expected = BigInteger.ONE;
 		assertEquals(actual, expected);
