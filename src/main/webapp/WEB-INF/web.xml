@@ -1,4 +1,3 @@
-<!--
 <web-app xmlns="http://java.sun.com/xml/ns/javaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
@@ -16,7 +15,7 @@
 
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>ua.gnatyuk.yaroslav.music_shop.SpringWebConfig</param-value>
+            <param-value>ua.gnatyuk.sweethome.config.SpringWebConfig</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -25,4 +24,4 @@
         <servlet-name>dispatcherServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-</web-app>-->
+</web-app>

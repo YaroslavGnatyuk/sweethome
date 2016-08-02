@@ -35,5 +35,4 @@ public class TestTemperatureDao {
                 ,true, temperatureDAO.getTemperaturesDuringSomePeriod(begin,end).size()>=50
                 && temperatureDAO.getTemperaturesDuringSomePeriod(begin,end).size()<=60);
     }
-
 }
