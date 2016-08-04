@@ -1,7 +1,8 @@
-package ua.gnatyuk.sweethome.controllers;
+package ua.gnatyuk.sweethome.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,16 +17,17 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(path = "/")
-public class OneHourController {
+public class JSONController {
     @Autowired
     TemperatureService temperatureService;
 
-    @RequestMapping(path = "/temp",method = RequestMethod.GET)
+    @RequestMapping(path = "/oneweek",method = RequestMethod.GET)
     @ResponseBody
+    @CrossOrigin(origins = "*")
     public List<TemperatureDTO> getTemperatureDuringOneHour(){
 
-        LocalDateTime begin = LocalDateTime.of(2016,06,12,0,0);
-        LocalDateTime end = LocalDateTime.of(2016,06,13,0,0);
+        LocalDateTime begin = LocalDateTime.of(2016,07,13,0,0);
+        LocalDateTime end = LocalDateTime.of(2016,07,20,0,0);
 
         return temperatureService.getTemperatureDuringOneHour(begin,end);
     }

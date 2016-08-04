@@ -23,7 +23,7 @@ public class TestTemperatureDao {
 
     @Test
     public void getLastRecord(){
-        System.out.println(temperatureDAO.getLastRecord().getId());
+        System.out.println(temperatureDAO.getLastRecord().toString());
     }
 
     @Test
