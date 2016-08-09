@@ -4,13 +4,13 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import ua.gnatyuk.sweethome.converter.EntityDTOConverter;
 import ua.gnatyuk.sweethome.dao.TemperatureDAO;
-import ua.gnatyuk.sweethome.dao.entities.Temperature;
-import ua.gnatyuk.sweethome.dto.TemperatureDTO;
+import ua.gnatyuk.sweethome.model.entities.Temperature;
+import ua.gnatyuk.sweethome.model.dto.TemperatureDTO;
+import ua.gnatyuk.sweethome.util.TimePeriod;
+import ua.gnatyuk.sweethome.util.converter.EntityDTOConverter;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,9 +34,9 @@ public class TemperatureDaoImpl implements TemperatureDAO {
 
     @Override
     @Transactional(readOnly = true)
-    public List<TemperatureDTO> getTemperaturesDuringSomePeriod(LocalDateTime begin, LocalDateTime end) {
-        Timestamp beginPeriod = Timestamp.valueOf(begin);
-        Timestamp endPeriod = Timestamp.valueOf(end);
+    public List<TemperatureDTO> getTemperaturesDuringSomePeriod(TimePeriod period) {
+        Timestamp beginPeriod = Timestamp.valueOf(period.getBegin());
+        Timestamp endPeriod = Timestamp.valueOf(period.getEnd());
 
         List<Temperature> temperatures = sessionFactory
                 .getCurrentSession()

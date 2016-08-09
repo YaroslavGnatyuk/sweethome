@@ -1,4 +1,4 @@
-package ua.gnatyuk.sweethome.dao.entities;
+package ua.gnatyuk.sweethome.model.entities;
 
 import javax.persistence.*;
 import java.sql.Timestamp;

@@ -1,4 +1,4 @@
-package ua.gnatyuk.sweethome.dto;
+package ua.gnatyuk.sweethome.model.dto;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

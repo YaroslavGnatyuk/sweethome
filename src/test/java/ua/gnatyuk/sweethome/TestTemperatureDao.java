@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ua.gnatyuk.sweethome.config.SpringConfig;
 import ua.gnatyuk.sweethome.dao.TemperatureDAO;
+import ua.gnatyuk.sweethome.util.TimePeriod;
 
 import java.time.LocalDateTime;
 
@@ -31,8 +32,12 @@ public class TestTemperatureDao {
         LocalDateTime begin = LocalDateTime.of(2016,3,22,10,0,0);
         LocalDateTime end = LocalDateTime.of(2016,3,22,11,0,0);
 
+        TimePeriod period = new TimePeriod();
+        period.setBegin(begin);
+        period.setEnd(end);
+
         assertEquals("We must have number of the records > 50 and <60"
-                ,true, temperatureDAO.getTemperaturesDuringSomePeriod(begin,end).size()>=50
-                && temperatureDAO.getTemperaturesDuringSomePeriod(begin,end).size()<=60);
+                ,true, temperatureDAO.getTemperaturesDuringSomePeriod(period).size()>=50
+                && temperatureDAO.getTemperaturesDuringSomePeriod(period).size()<=60);
     }
 }
