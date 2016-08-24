@@ -14,47 +14,22 @@ public class TemperatureServImpl implements TemperatureService {
     TemperatureDAO temperatureDAO;
 
     @Override
-    public List<TemperatureDTO> getTemperatureDuringOneMonth(TimePeriod period) {
+    public List<TemperatureDTO> getTemperatureDuringSomePeriod(TimePeriod period) {
         return temperatureDAO.getTemperaturesDuringSomePeriod(period);
     }
 
     @Override
-    public List<TemperatureDTO> getDataDuringOneDay(TimePeriod period) {
+    public List<TemperatureDTO> getDataDuringNextPeriod(TimePeriod period) {
         return temperatureDAO.getTemperaturesDuringSomePeriod(period);
     }
 
     @Override
-    public List<TemperatureDTO> getTemperatureDuringOneHour(TimePeriod period) {
-        return temperatureDAO.getTemperaturesDuringSomePeriod(period);
+    public TemperatureDTO getLastRecord() {
+        return temperatureDAO.getLastRecord();
     }
 
     @Override
-    public List<TemperatureDTO> getTemperatureDuringNextMonth(TimePeriod period) {
-        return temperatureDAO.getTemperaturesDuringSomePeriod(period);
-    }
-
-    @Override
-    public List<TemperatureDTO> getTemperatureDuringPreviousMonth(TimePeriod period) {
-        return temperatureDAO.getTemperaturesDuringSomePeriod(period);
-    }
-
-    @Override
-    public List<TemperatureDTO> getDataDuringNextDay(TimePeriod period) {
-        return temperatureDAO.getTemperaturesDuringSomePeriod(period);
-    }
-
-    @Override
-    public List<TemperatureDTO> getDataDuringPreviousDay(TimePeriod period) {
-        return temperatureDAO.getTemperaturesDuringSomePeriod(period);
-    }
-
-    @Override
-    public List<TemperatureDTO> getDataDuringNextHour(TimePeriod period) {
-        return temperatureDAO.getTemperaturesDuringSomePeriod(period);
-    }
-
-    @Override
-    public List<TemperatureDTO> getDataDuringPreviousHour(TimePeriod period) {
+    public List<TemperatureDTO> getDataDuringPreviousPreviousPeriod(TimePeriod period) {
         return temperatureDAO.getTemperaturesDuringSomePeriod(period);
     }
 }

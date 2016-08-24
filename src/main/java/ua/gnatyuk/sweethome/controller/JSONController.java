@@ -3,6 +3,7 @@ package ua.gnatyuk.sweethome.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -11,6 +12,7 @@ import ua.gnatyuk.sweethome.service.TemperatureService;
 import ua.gnatyuk.sweethome.util.TimePeriod;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,69 +26,92 @@ public class JSONController {
     TemperatureService temperatureService;
 
     @Autowired
-    @Qualifier(value = "timePeriodOneDay")
-    TimePeriod timePeriodOneDay;
+    @Qualifier(value = "timePeriodOneHour")
+    TimePeriod hour;
 
     @Autowired
-    @Qualifier(value = "timePeriodOneHour")
-    TimePeriod timePeriodOneHour;
+    @Qualifier(value = "timePeriodOneDay")
+    TimePeriod day;
 
-    @RequestMapping(path = "/oneday",method = RequestMethod.GET)
+    @Autowired
+    @Qualifier(value = "timePeriodOneMonth")
+    TimePeriod month;
+
+    @CrossOrigin(origins = "*")
+    @RequestMapping(path = "/lastrecord",method = RequestMethod.GET)
     @ResponseBody
-//    @CrossOrigin(origins = "*")
-    public List<TemperatureDTO> getDataDuringLastDay(){
-        if(!isLastRecordFresh()){
-            timePeriodOneDay.setEnd(LocalDateTime.now());
-            return temperatureService.getDataDuringOneDay(timePeriodOneDay);
-        }
-        else
-            return temperatureService.getDataDuringOneDay(timePeriodOneDay);
+    public TemperatureDTO lastRecord(){
+        return temperatureService.getLastRecord();
     }
 
     @RequestMapping(path = "/onehour",method = RequestMethod.GET)
     @ResponseBody
     public List<TemperatureDTO> getDataDuringLastHour(){
-        if(!isLastRecordFresh()){
-            timePeriodOneHour.setEnd(LocalDateTime.now());
-            return temperatureService.getDataDuringOneDay(timePeriodOneHour);
-        }
-        else
-            return temperatureService.getDataDuringOneDay(timePeriodOneHour);
+        LocalDateTime currentTime = LocalDateTime.now();
+        hour.setEnd(currentTime);
+
+        return temperatureService.getTemperatureDuringSomePeriod(hour);
+    }
+
+    @RequestMapping(path = "/oneday",method = RequestMethod.GET)
+    @ResponseBody
+//    @CrossOrigin(origins = "*")
+    public List<TemperatureDTO> getDataDuringLastDay(){
+        LocalDateTime currentTime = LocalDateTime.now();
+        day.setEnd(currentTime);
+
+        return temperatureService.getTemperatureDuringSomePeriod(day);
+    }
+
+    @RequestMapping(path = "/onemonth",method = RequestMethod.GET)
+    @ResponseBody
+//    @CrossOrigin(origins = "*")
+    public List<TemperatureDTO> getDataDuringLastMonth(){
+        LocalDateTime currentTime = LocalDateTime.now();
+        month.setEnd(currentTime);
+
+        return trimDataPerMonth((ArrayList<TemperatureDTO>) temperatureService
+                .getTemperatureDuringSomePeriod(month));
     }
 
     @RequestMapping(path = "/onehourforward", method = RequestMethod.GET)
     @ResponseBody
     public List<TemperatureDTO> getDataOneHourForward(){
-        timePeriodOneHour.shiftForwardByOneHour();
-        return temperatureService.getDataDuringNextHour(timePeriodOneHour);
+        hour.shiftForwardByOneHour();
+        return temperatureService.getDataDuringNextPeriod(hour);
     }
 
     @RequestMapping(path = "/onehourbackward", method = RequestMethod.GET)
     @ResponseBody
     public List<TemperatureDTO> getDataOneHourBackward(){
-        timePeriodOneHour.shiftBackwardByOneHour();
-        return temperatureService.getDataDuringPreviousHour(timePeriodOneHour);
+        hour.shiftBackwardByOneHour();
+        return temperatureService.getDataDuringPreviousPreviousPeriod(hour);
     }
 
     @RequestMapping(path = "/onedayforward", method = RequestMethod.GET)
     @ResponseBody
     public List<TemperatureDTO> getDataOneDayForward(){
-        timePeriodOneHour.shiftForwardByOneDay();
-        return temperatureService.getDataDuringNextDay(timePeriodOneHour);
+        hour.shiftForwardByOneDay();
+        return temperatureService.getDataDuringNextPeriod(hour);
     }
 
     @RequestMapping(path = "/onedaybackward", method = RequestMethod.GET)
     @ResponseBody
     public List<TemperatureDTO> getDataOneDayBackward(){
-        timePeriodOneHour.shiftBackwardByOneDay();
-        return temperatureService.getDataDuringPreviousDay(timePeriodOneHour);
+        hour.shiftBackwardByOneDay();
+        return temperatureService.getDataDuringPreviousPreviousPeriod(hour);
     }
 
-    private boolean isLastRecordFresh(){
-        if( timePeriodOneDay.getEnd().compareTo(LocalDateTime.now())<0 ) {
-            return false;
+    private ArrayList<TemperatureDTO> trimDataPerMonth(ArrayList<TemperatureDTO> data){
+
+        ArrayList<TemperatureDTO> temp = new ArrayList<>();
+
+        for (int i = 0; i < data.size(); i++) {
+            if (i % 20 == 0){
+                temp.add(data.get(i));
+            }
         }
-        else
-            return true;
+
+        return temp;
     }
 }

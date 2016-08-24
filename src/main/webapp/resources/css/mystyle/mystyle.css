@@ -1,0 +1,68 @@
+@import 'https://fonts.googleapis.com/css?family=Open+Sans:300';
+.navmenu{
+  background-color: #d4b9ef
+}
+
+.main_tab_color {
+  background-color: #fff689;
+}
+
+body {
+  background-image: url("../../img/background.jpg");
+  background-repeat: repeat;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  min-width: 50%;
+  min-height: 50%;
+
+}
+
+.hideThisSelector{
+  visibility: hidden;
+}
+.loading{
+  width: 30px;
+  height: 30px;
+  background-image: url("../../img/loading.gif");
+  margin-left: 40px;
+}
+
+.main_img {
+  background-image: url("../../img/flat.jpg");
+  background-size: 1100px 900px;
+  height: 900px;
+  width: 1100px;
+}
+
+/*This section is preference for fields on main screen */
+.block{
+  margin-top:70px;
+}
+
+.field {
+  background: rgba(255, 246, 137, 0.6);
+  width:140px;
+  height:40px;
+  margin-top:1px; margin-left:94px;
+  border:1px solid #969696;
+  font-size: 20px;
+  text-align: left;
+  border-radius: 3px;
+}
+.icon{
+  height: 40px;
+  width: 40px;
+}
+
+.value{
+  height: 40px;
+  width: 100px;
+}
+/*End of fields preferences on main screen*/

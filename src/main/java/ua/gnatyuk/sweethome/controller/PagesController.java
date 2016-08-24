@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Created by yroslav on 8/4/16.
  */
 @Controller
-public class IndexPagesController {
-    @RequestMapping(path = "/index",method = RequestMethod.GET)
+public class PagesController {
+
+    @RequestMapping(path = {"/"},method = RequestMethod.GET)
     public String indexPage(){
         return "index";
     }
+
 }

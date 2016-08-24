@@ -60,4 +60,18 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
 
         return new TimePeriod(begin,end);
     }
+
+    @Bean(name = "timePeriodOneMonth")
+    @Scope(value = "session",   proxyMode = ScopedProxyMode.TARGET_CLASS)
+    public TimePeriod getTimePeriodOneMonth(){
+        LocalDateTime begin = LocalDateTime.now();
+        begin = begin.minusDays(begin.getDayOfMonth());
+        begin = begin.minusHours(begin.getHour());
+        begin = begin.minusMinutes(begin.getMinute());
+        begin = begin.minusSeconds(begin.getSecond());
+
+        LocalDateTime end = LocalDateTime.now();
+
+        return new TimePeriod(begin,end);
+    }
 }
