@@ -22,25 +22,22 @@ $(function(){
         $("#myChart").remove();
     })
 
-    $("li#tInsideOneHour").click(function(){
+    $("#tInsideOneHour").click(function(){
         removeAllAddedClasses();
         showButtonsDirection();
-        $(".panel.panel-default.panel-table.main_img").remove();
         addDivForChart();
 
         $(".btn.btn-default.btn-success#fast-backward").addClass("tInsideOneHour");
         $(".btn.btn-default.btn-success#backward").addClass("tInsideOneHour");
         $(".btn.btn-default.btn-success#forward").addClass("tInsideOneHour");
-
         $(".btn.btn-default.btn-success#fast-forward").addClass("tInsideOneHour");
 
-        getDataPerSomePeriod(dates,temperatureInside1,temperatureInside2,temperatureOutside,pressure,hour, "inside");
+        getDataPerSomePeriod(dates,temperatureInside1,temperatureInside2,temperatureOutside,pressure,hour, "inside", "current");
     })
 
     $("li#tInsideOneDay").click(function(){
         removeAllAddedClasses();
         showButtonsDirection();
-        $(".panel.panel-default.panel-table.main_img").remove();
         addDivForChart();
 
         $(".btn.btn-default.btn-success#fast-backward").addClass("tInsideOneDay");
@@ -48,13 +45,12 @@ $(function(){
         $(".btn.btn-default.btn-success#forward").addClass("tInsideOneDay");
         $(".btn.btn-default.btn-success#fast-forward").addClass("tInsideOneDay");
 
-        getDataPerSomePeriod(dates,temperatureInside1,temperatureInside2,temperatureOutside,pressure,day, "inside");
+        getDataPerSomePeriod(dates,temperatureInside1,temperatureInside2,temperatureOutside,pressure,day, "inside", "current");
     })
 
     $("li#tInsideOneMonth").click(function(){
         removeAllAddedClasses();
         showButtonsDirection();
-        $(".panel.panel-default.panel-table.main_img").remove();
         addDivForChart();
 
         $(".btn.btn-default.btn-success#fast-backward").addClass("tInsideOneMonth");
@@ -62,13 +58,12 @@ $(function(){
         $(".btn.btn-default.btn-success#forward").addClass("tInsideOneMonth");
         $(".btn.btn-default.btn-success#fast-forward").addClass("tInsideOneMonth");
 
-        getDataPerSomePeriod(dates,temperatureInside1,temperatureInside2,temperatureOutside,pressure,month, "inside");
+        getDataPerSomePeriod(dates,temperatureInside1,temperatureInside2,temperatureOutside,pressure,month, "inside", "current");
     })
 
     $("li#tOutsideOneHour").click(function(){
         removeAllAddedClasses();
         showButtonsDirection();
-        $(".panel.panel-default.panel-table.main_img").remove();
         addDivForChart();
 
         $(".btn.btn-default.btn-success#fast-backward").addClass("tOutsideOneHour");
@@ -76,13 +71,12 @@ $(function(){
         $(".btn.btn-default.btn-success#forward").addClass("tOutsideOneHour");
         $(".btn.btn-default.btn-success#fast-forward").addClass("tOutsideOneHour");
 
-        getDataPerSomePeriod(dates,temperatureInside1,temperatureInside2,temperatureOutside,pressure, hour, "outside");
+        getDataPerSomePeriod(dates,temperatureInside1,temperatureInside2,temperatureOutside,pressure, hour, "outside", "current");
     })
 
     $("li#tOutsideOneDay").click(function(){
         removeAllAddedClasses();
         showButtonsDirection();
-        $(".panel.panel-default.panel-table.main_img").remove();
         addDivForChart();
 
         $(".btn.btn-default.btn-success#fast-backward").addClass("tOutsideOneDay");
@@ -90,13 +84,12 @@ $(function(){
         $(".btn.btn-default.btn-success#forward").addClass("tOutsideOneDay");
         $(".btn.btn-default.btn-success#fast-forward").addClass("tOutsideOneDay");
 
-        getDataPerSomePeriod(dates,temperatureInside1,temperatureInside2,temperatureOutside,pressure, day, "outside");
+        getDataPerSomePeriod(dates,temperatureInside1,temperatureInside2,temperatureOutside,pressure, day, "outside", "current");
     })
 
     $("li#tOutsideOneMonth").click(function(){
         removeAllAddedClasses();
         showButtonsDirection();
-        $(".panel.panel-default.panel-table.main_img").remove();
         addDivForChart();
 
         $(".btn.btn-default.btn-success#fast-backward").addClass("tOutsideOneMonth");
@@ -104,13 +97,12 @@ $(function(){
         $(".btn.btn-default.btn-success#forward").addClass("tOutsideOneMonth");
         $(".btn.btn-default.btn-success#fast-forward").addClass("tOutsideOneMonth");
 
-        getDataPerSomePeriod(dates,temperatureInside1,temperatureInside2,temperatureOutside,pressure, month, "outside");
+        getDataPerSomePeriod(dates,temperatureInside1,temperatureInside2,temperatureOutside,pressure, month, "outside", "current");
     })
     /*----------------------------------------------------------*/
     $("li#pressureOneHour").click(function(){
         removeAllAddedClasses();
         showButtonsDirection();
-        $(".panel.panel-default.panel-table.main_img").remove();
         addDivForChart();
 
         $(".btn.btn-default.btn-success#fast-backward").addClass("pressureOneHour");
@@ -118,13 +110,12 @@ $(function(){
         $(".btn.btn-default.btn-success#forward").addClass("pressureOneHour");
         $(".btn.btn-default.btn-success#fast-forward").addClass("pressureOneHour");
 
-        getDataPerSomePeriod(dates,temperatureInside1,temperatureInside2,temperatureOutside,pressure, hour, "pressure");
+        getDataPerSomePeriod(dates,temperatureInside1,temperatureInside2,temperatureOutside,pressure, hour, "pressure", "current");
     })
 
     $("li#pressureOneDay").click(function(){
         removeAllAddedClasses();
         showButtonsDirection();
-        $(".panel.panel-default.panel-table.main_img").remove();
         addDivForChart();
 
         $(".btn.btn-default.btn-success#fast-backward").addClass("pressureOneDay");
@@ -132,13 +123,12 @@ $(function(){
         $(".btn.btn-default.btn-success#forward").addClass("pressureOneDay");
         $(".btn.btn-default.btn-success#fast-forward").addClass("pressureOneDay");
 
-        getDataPerSomePeriod(dates,temperatureInside1,temperatureInside2,temperatureOutside,pressure, day, "pressure");
+        getDataPerSomePeriod(dates,temperatureInside1,temperatureInside2,temperatureOutside,pressure, day, "pressure", "current");
     })
 
     $("li#pressureOneMonth").click(function(){
         removeAllAddedClasses();
         showButtonsDirection();
-        $(".panel.panel-default.panel-table.main_img").remove();
         addDivForChart();
 
         $(".btn.btn-default.btn-success#fast-backward").addClass("pressureOneMonth");
@@ -146,7 +136,7 @@ $(function(){
         $(".btn.btn-default.btn-success#forward").addClass("pressureOneMonth");
         $(".btn.btn-default.btn-success#fast-forward").addClass("pressureOneMonth");
 
-        getDataPerSomePeriod(dates,temperatureInside1,temperatureInside2,temperatureOutside,pressure, month, "pressure");
+        getDataPerSomePeriod(dates,temperatureInside1,temperatureInside2,temperatureOutside,pressure, month, "pressure", "current");
     })
 
     function clearArrays(){
@@ -191,11 +181,13 @@ $(function(){
         .removeClass("pressureOneHour")
         .removeClass("pressureOneDay")
         .removeClass("pressureOneMonth")
+
+        $("#main").toggleClass("active")
     }
 
 
-    function getDataPerSomePeriod(date, inside1, inside2, outside, pressure, period, currentParameter) {
-        var address = "http://178.219.93.93:8888/sweethome/" + period;
+    function getDataPerSomePeriod(date, inside1, inside2, outside, pressure, period, currentParameter, direction) {
+        var address = "http://178.219.93.93:8888/sweethome/" + period + "/" + direction;
 
         $.ajax({
             url:address,
@@ -226,6 +218,23 @@ $(function(){
                         if (key == "barPressure" && (currentParameter.localeCompare("pressure") == 0)) {
                             pressure.push(value)
                         }
+
+                        if(currentParameter.localeCompare("all") == 0){
+                            if (key == "temperatureInside1") {
+                                inside1.push(value)
+                            }
+
+                            if (key == "temperatureInside2") {
+                                inside2.push(value)
+                            }
+
+                            if (key == "temperatureOutside") {
+                                outside.push(value)
+                            }
+                            if (key == "barPressure") {
+                                pressure.push(value)
+                            }
+                        }
                     });
                 })
 
@@ -239,6 +248,7 @@ $(function(){
                 if (xhr.readyState==4){
                     var scaleForTemperature = "-30:50:5";
                     var scaleForPressure = "740:770:5";
+                    var scaleForAllParameters = "-30:770:5";
 
                     hideGifLoading();
 
@@ -255,6 +265,11 @@ $(function(){
                     if(currentParameter.localeCompare("pressure") == 0) {
                         painChart(stockState.dates, stockState.temp1, stockState.temp2,
                             stockState.tempOutside, stockState.pressure,scaleForPressure);
+                    }
+
+                    if(currentParameter.localeCompare("all") == 0) {
+                        painChart(stockState.dates, stockState.temp1, stockState.temp2,
+                            stockState.tempOutside, stockState.pressure,scaleForAllParameters);
                     }
 
                     clearArrays();
@@ -286,6 +301,8 @@ $(function(){
     }
 
     function addDivForChart(){
+        $(".panel.panel-default.panel-table.main_img").remove();
+
         var my_chart = $('<div/>',{
             id:'myChart'
         })

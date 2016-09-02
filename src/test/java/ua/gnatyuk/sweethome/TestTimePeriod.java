@@ -22,11 +22,17 @@ public class TestTimePeriod {
     TimePeriod month;
 
     @Autowired
+    @Qualifier(value = "timePeriodOneHour")
+    TimePeriod hour;
+
+    @Autowired
     TemperatureService temperatureService;
 
     @Test
     public void getTimePeriod(){
-        System.out.println(temperatureService.getTemperatureDuringSomePeriod(month).size());
-
+        System.out.println("Before shifting" + hour.toString());
+        hour.shiftBackwardByOneHour();
+        System.out.println("After shifting" + hour.toString());
+        System.out.println(temperatureService.getDataDuringNextPeriod(hour).toString());
     }
 }

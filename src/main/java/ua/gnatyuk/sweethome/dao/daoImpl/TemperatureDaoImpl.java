@@ -22,6 +22,18 @@ public class TemperatureDaoImpl implements TemperatureDAO {
 
     @Override
     @Transactional(readOnly = true)
+    public TemperatureDTO getFirstRecord() {
+        Temperature temperature = (Temperature) sessionFactory
+                .getCurrentSession()
+                .createQuery("from Temperature order by date ASC")
+                .setMaxResults(1)
+                .uniqueResult();
+
+        return EntityDTOConverter.convertTemperatureToTemperatureDTO(temperature);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public TemperatureDTO getLastRecord() {
         Temperature temperature = (Temperature) sessionFactory
                 .getCurrentSession()

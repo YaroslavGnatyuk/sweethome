@@ -24,12 +24,17 @@ public class TemperatureServImpl implements TemperatureService {
     }
 
     @Override
+    public TemperatureDTO getFirstRecord() {
+        return temperatureDAO.getFirstRecord();
+    }
+
+    @Override
     public TemperatureDTO getLastRecord() {
         return temperatureDAO.getLastRecord();
     }
 
     @Override
-    public List<TemperatureDTO> getDataDuringPreviousPreviousPeriod(TimePeriod period) {
+    public List<TemperatureDTO> getDataDuringPreviousPeriod(TimePeriod period) {
         return temperatureDAO.getTemperaturesDuringSomePeriod(period);
     }
 }

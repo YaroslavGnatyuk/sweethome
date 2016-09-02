@@ -6,6 +6,8 @@ import ua.gnatyuk.sweethome.util.TimePeriod;
 import java.util.List;
 
 public interface TemperatureDAO {
+    TemperatureDTO getFirstRecord();
     TemperatureDTO getLastRecord();
+
     List<TemperatureDTO> getTemperaturesDuringSomePeriod(TimePeriod period);
 }

@@ -1,6 +1,7 @@
 package ua.gnatyuk.sweethome.config;
 
 import org.springframework.context.annotation.*;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -19,7 +20,12 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/").setCachePeriod(31556926);
+
+        registry
+                .addResourceHandler("/resources/**")
+                .addResourceLocations("/resources/")
+                .setCachePeriod(31556926);
+
         if (!registry.hasMappingForPattern("/webjars/**")) {
             registry.addResourceHandler("/webjars/**").addResourceLocations(
                     "classpath:/META-INF/resources/webjars/");
@@ -36,41 +42,61 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
         return viewResolver;
     }
 
-    @Bean(name = "timePeriodOneDay")
-    @Scope(value = "session",   proxyMode = ScopedProxyMode.TARGET_CLASS)
-    public TimePeriod getTimePeriodOneDay(){
+    @Bean(name = "timePeriodOneHour")
+    @Scope(value = WebApplicationContext.SCOPE_SESSION,proxyMode = ScopedProxyMode.TARGET_CLASS)
+    public TimePeriod getTimePeriodOneHour(){
+
         LocalDateTime begin = LocalDateTime.now();
-        begin = begin.minusHours(begin.getHour());
-        begin = begin.minusMinutes(begin.getMinute());
-        begin = begin.minusSeconds(begin.getSecond());
+        begin = begin
+                .minusMinutes(begin.getMinute())
+                .minusSeconds(begin.getSecond());
 
         LocalDateTime end = LocalDateTime.now();
+        end = end
+                .plusHours(1)
+                .minusMinutes(end.getMinute());
 
         return new TimePeriod(begin,end);
     }
 
-    @Bean(name = "timePeriodOneHour")
-    @Scope(value = "session",proxyMode = ScopedProxyMode.TARGET_CLASS)
-    public TimePeriod getTimePeriodOneHour(){
+    @Bean(name = "timePeriodOneDay")
+    @Scope(value = WebApplicationContext.SCOPE_SESSION,   proxyMode = ScopedProxyMode.TARGET_CLASS)
+    public TimePeriod getTimePeriodOneDay(){
+
         LocalDateTime begin = LocalDateTime.now();
-        begin = begin.minusMinutes(begin.getMinute());
-        begin = begin.minusSeconds(begin.getSecond());
+        begin = begin
+                .minusHours(begin.getHour())
+                .minusMinutes(begin.getMinute())
+                .minusSeconds(begin.getSecond());
 
         LocalDateTime end = LocalDateTime.now();
+        end = end
+                .plusDays(1L)
+                .minusHours(end.getHour())
+                .minusMinutes(end.getMinute())
+                .minusSeconds(end.getSecond());
 
         return new TimePeriod(begin,end);
     }
 
     @Bean(name = "timePeriodOneMonth")
-    @Scope(value = "session",   proxyMode = ScopedProxyMode.TARGET_CLASS)
+    @Scope(value = WebApplicationContext.SCOPE_SESSION,   proxyMode = ScopedProxyMode.TARGET_CLASS)
     public TimePeriod getTimePeriodOneMonth(){
+
         LocalDateTime begin = LocalDateTime.now();
-        begin = begin.minusDays(begin.getDayOfMonth());
-        begin = begin.minusHours(begin.getHour());
-        begin = begin.minusMinutes(begin.getMinute());
-        begin = begin.minusSeconds(begin.getSecond());
+        begin = begin
+                .minusDays(begin.getDayOfMonth()-1L)
+                .minusHours(begin.getHour())
+                .minusMinutes(begin.getMinute())
+                .minusSeconds(begin.getSecond());
 
         LocalDateTime end = LocalDateTime.now();
+        end = end
+                .minusDays(end.getDayOfMonth()-1L)
+                .plusMonths(1L)
+                .minusHours(end.getHour())
+                .minusMinutes(end.getMinute())
+                .minusSeconds(end.getSecond());
 
         return new TimePeriod(begin,end);
     }

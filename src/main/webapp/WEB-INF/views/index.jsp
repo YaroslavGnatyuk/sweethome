@@ -20,11 +20,11 @@
         <script type="text/javascript" src= "<c:url value="/resources/js/zingchart_branded_version_2.4.1/zingchart.min.js"/>"></script>
 
         <script type="text/javascript" src="<c:url value="/resources/js/myscripts/navigation_bar.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/myscripts/paint_chart.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/myscripts/paint_chart.v1.001.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/myscripts/config_chart.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/myscripts/set_period.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/myscripts/buttons.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/myscripts/lastRecord.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/myscripts/buttons.v1.011.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/myscripts/lastRecord.v1.001.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/jquery/jquery-ui.min.js"/>"></script>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,18 +33,12 @@
     <body>
         <div class="container" style="margin-top: 50px;">
             <nav class="navbar navbar-default" role="navigation">
-                <div class="navbar-header" id = "main">
+                <div class="navbar-header active" id = "main">
                     <a class="navbar-brand" href="/sweethome/">Main</a>
                 </div>
 
                 <div>
                     <ul class="nav navbar-nav">
-                        <li id="zerotab" class= "dropdown">
-                            <a href="#" class="navbar-brand">
-                                Real time
-                            </a>
-                        </li>
-
                         <li id="firsttab" class= "dropdown">
                             <a href="#" class="dropdown-toggle navbar-brand" data-toggle="dropdown">
                                 Temperatures inside
@@ -93,22 +87,6 @@
                                 <li id="pressureSetPeriod"><a href="#">Set period...</a></li>
                             </ul>
 
-                        </li>
-
-                        <li id="fourthtab" class="dropdown">
-                            <a href="#" class="dropdown-toggle navbar-brand" data-toggle="dropdown">
-                                All together
-                                <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">All data per one hour</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">All data per one day</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">All data per one month</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Set period...</a></li>
-                            </ul>
                         </li>
 
                         <li id="fifthtab" class="dropdown">

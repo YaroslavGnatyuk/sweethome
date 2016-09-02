@@ -76,6 +76,7 @@ function getCloseConfig(dates, temperatureInside1, temperatureInside2, temperatu
                 fontFamily: "Open Sans"
             }
         },
+
         series : [
             {
                 values: temperatureInside1,
