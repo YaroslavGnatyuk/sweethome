@@ -50,8 +50,6 @@ public class JSONController {
     @ResponseBody
     public List<TemperatureDTO> getDataPerSomePeriod(@PathVariable("direction") String direction,
                                                      @PathVariable("period") String period) {
-
-
         switch (period) {
             case ("onehour"): {
                 switch (direction) {
@@ -177,7 +175,7 @@ public class JSONController {
                 switch (direction) {
                     case ("current"): {
                         resetAllPeriods();
-                        return trimDataPerMonth((ArrayList<TemperatureDTO>) temperatureService
+                        return trimDataPerMonth(temperatureService
                                 .getTemperatureDuringSomePeriod(month));
                     }
 
@@ -185,12 +183,12 @@ public class JSONController {
                         month.shiftFastBackwardByOneMonth();
 
                         List<TemperatureDTO> timePeriodWithData =
-                                temperatureService.getTemperatureDuringSomePeriod(month);
+                                trimDataPerMonth(temperatureService.getTemperatureDuringSomePeriod(month));
                         if (!timePeriodWithData.isEmpty()) {
                             return timePeriodWithData;
                         } else {
                             month.shiftFastForwardByOneMonth();
-                            return trimDataPerMonth((ArrayList<TemperatureDTO>) temperatureService
+                            return trimDataPerMonth(temperatureService
                                     .getTemperatureDuringSomePeriod(month));
                         }
                     }
@@ -199,12 +197,12 @@ public class JSONController {
                         month.shiftBackwardByOneMonth();
 
                         List<TemperatureDTO> timePeriodWithData =
-                                temperatureService.getTemperatureDuringSomePeriod(month);
+                                trimDataPerMonth(temperatureService.getTemperatureDuringSomePeriod(month));
                         if (!timePeriodWithData.isEmpty()) {
                             return timePeriodWithData;
                         } else {
                             month.shiftForwardByOneMonth();
-                            return trimDataPerMonth((ArrayList<TemperatureDTO>) temperatureService
+                            return trimDataPerMonth(temperatureService
                                     .getTemperatureDuringSomePeriod(month));
                         }
                     }
@@ -213,12 +211,12 @@ public class JSONController {
                         month.shiftForwardByOneMonth();
 
                         List<TemperatureDTO> timePeriodWithData =
-                                temperatureService.getTemperatureDuringSomePeriod(month);
+                                trimDataPerMonth(temperatureService.getTemperatureDuringSomePeriod(month));
                         if (!timePeriodWithData.isEmpty()) {
                             return timePeriodWithData;
                         } else {
                             month.shiftBackwardByOneMonth();
-                            return trimDataPerMonth((ArrayList<TemperatureDTO>) temperatureService
+                            return trimDataPerMonth(temperatureService
                                     .getTemperatureDuringSomePeriod(month));
                         }
                     }
@@ -227,12 +225,12 @@ public class JSONController {
                         day.shiftFastForwardByOneMonth();
 
                         List<TemperatureDTO> timePeriodWithData =
-                                temperatureService.getTemperatureDuringSomePeriod(month);
+                                trimDataPerMonth(temperatureService.getTemperatureDuringSomePeriod(month));
                         if (!timePeriodWithData.isEmpty()) {
                             return timePeriodWithData;
                         } else {
                             month.shiftFastBackwardByOneMonth();
-                            return trimDataPerMonth((ArrayList<TemperatureDTO>) temperatureService
+                            return trimDataPerMonth(temperatureService
                                     .getTemperatureDuringSomePeriod(month));
                         }
                     }
@@ -246,16 +244,13 @@ public class JSONController {
         return null;
     }
 
-    private ArrayList<TemperatureDTO> trimDataPerMonth(ArrayList<TemperatureDTO> data) {
-
-        ArrayList<TemperatureDTO> temp = new ArrayList<>();
-
+    private List<TemperatureDTO> trimDataPerMonth(List<TemperatureDTO> data) {
+        List<TemperatureDTO> temp = new ArrayList<>();
         for (int i = 0; i < data.size(); i++) {
             if (i % 20 == 0) {
                 temp.add(data.get(i));
             }
         }
-
         return temp;
     }
 

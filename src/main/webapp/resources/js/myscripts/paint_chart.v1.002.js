@@ -182,7 +182,9 @@ $(function(){
         .removeClass("pressureOneDay")
         .removeClass("pressureOneMonth")
 
-        $("#main").toggleClass("active")
+        if($("#main").hasClass("active")){
+            $("#main").toggleClass("active")
+        }
     }
 
 
