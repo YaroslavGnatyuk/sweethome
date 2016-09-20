@@ -3,9 +3,9 @@ package ua.gnatyuk.sweethome.util.converter;
 import ua.gnatyuk.sweethome.model.entities.Temperature;
 import ua.gnatyuk.sweethome.model.dto.TemperatureDTO;
 
-public final class EntityDTOConverter {
+public final class EntityToDTOConverter {
 
-    public EntityDTOConverter() {
+    public EntityToDTOConverter() {
 
     }
 

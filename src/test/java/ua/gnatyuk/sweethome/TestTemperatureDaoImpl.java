@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = {SpringConfig.class})
-public class TestTemperatureDao {
+public class TestTemperatureDaoImpl {
     @Autowired
     TemperatureDAO temperatureDAO;
 
@@ -36,7 +36,7 @@ public class TestTemperatureDao {
         period.setBegin(begin);
         period.setEnd(end);
 
-        assertEquals("We must have number of the records > 50 and <60"
+        assertEquals("We must have number of the records > 50 and <60. This is records per one hour."
                 ,true, temperatureDAO.getTemperaturesDuringSomePeriod(period).size()>=50
                 && temperatureDAO.getTemperaturesDuringSomePeriod(period).size()<=60);
     }

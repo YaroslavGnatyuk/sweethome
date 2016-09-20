@@ -1,5 +1,6 @@
 package ua.gnatyuk.sweethome.dao;
 
+import ua.gnatyuk.sweethome.exception.NoMoreRecordsInDBException;
 import ua.gnatyuk.sweethome.model.dto.TemperatureDTO;
 import ua.gnatyuk.sweethome.util.TimePeriod;
 
@@ -10,4 +11,5 @@ public interface TemperatureDAO {
     TemperatureDTO getLastRecord();
 
     List<TemperatureDTO> getTemperaturesDuringSomePeriod(TimePeriod period);
+    TemperatureDTO getPreviousRecordById(Integer id) throws NoMoreRecordsInDBException;
 }

@@ -5,10 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ua.gnatyuk.sweethome.dao.TemperatureDAO;
-import ua.gnatyuk.sweethome.model.entities.Temperature;
+import ua.gnatyuk.sweethome.exception.NoMoreRecordsInDBException;
 import ua.gnatyuk.sweethome.model.dto.TemperatureDTO;
+import ua.gnatyuk.sweethome.model.entities.Temperature;
 import ua.gnatyuk.sweethome.util.TimePeriod;
-import ua.gnatyuk.sweethome.util.converter.EntityDTOConverter;
+import ua.gnatyuk.sweethome.util.converter.EntityToDTOConverter;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class TemperatureDaoImpl implements TemperatureDAO {
                 .setMaxResults(1)
                 .uniqueResult();
 
-        return EntityDTOConverter.convertTemperatureToTemperatureDTO(temperature);
+        return EntityToDTOConverter.convertTemperatureToTemperatureDTO(temperature);
     }
 
     @Override
@@ -41,7 +42,21 @@ public class TemperatureDaoImpl implements TemperatureDAO {
                 .setMaxResults(1)
                 .uniqueResult();
 
-        return EntityDTOConverter.convertTemperatureToTemperatureDTO(temperature);
+        return EntityToDTOConverter.convertTemperatureToTemperatureDTO(temperature);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public TemperatureDTO getPreviousRecordById(Integer id) throws NoMoreRecordsInDBException {
+        Temperature temperature = (Temperature) sessionFactory
+                .getCurrentSession()
+                .createQuery("FROM Temperature where id = :id")
+                .setParameter("id",--id).uniqueResult();    // --id - I get previous record.
+        if(temperature == null){
+            throw new NoMoreRecordsInDBException("It is a begin of sql table!");
+        }else{
+            return EntityToDTOConverter.convertTemperatureToTemperatureDTO(temperature);
+        }
     }
 
     @Override
@@ -58,10 +73,7 @@ public class TemperatureDaoImpl implements TemperatureDAO {
                 .list();
 
         List<TemperatureDTO> temperatureDTOs = new ArrayList<>(temperatures.size());
-
-        for (int i = 0; i < temperatures.size(); i++) {
-            temperatureDTOs.add(i,EntityDTOConverter.convertTemperatureToTemperatureDTO(temperatures.get(i)));
-        }
+        temperatures.forEach(x->temperatureDTOs.add(EntityToDTOConverter.convertTemperatureToTemperatureDTO(x)));
         return temperatureDTOs;
     }
 }

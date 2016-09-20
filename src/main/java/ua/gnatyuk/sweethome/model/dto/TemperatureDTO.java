@@ -5,8 +5,8 @@ import lombok.ToString;
 
 import java.sql.Timestamp;
 
-@ToString(exclude="id")
-@EqualsAndHashCode(exclude="id")
+@ToString
+@EqualsAndHashCode
 public class TemperatureDTO {
     private Integer id;
     private Timestamp date;

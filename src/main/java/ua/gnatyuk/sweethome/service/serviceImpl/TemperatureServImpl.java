@@ -8,6 +8,7 @@ import ua.gnatyuk.sweethome.service.TemperatureService;
 import ua.gnatyuk.sweethome.util.TimePeriod;
 
 import java.util.List;
+
 @Service
 public class TemperatureServImpl implements TemperatureService {
     @Autowired
@@ -19,11 +20,6 @@ public class TemperatureServImpl implements TemperatureService {
     }
 
     @Override
-    public List<TemperatureDTO> getDataDuringNextPeriod(TimePeriod period) {
-        return temperatureDAO.getTemperaturesDuringSomePeriod(period);
-    }
-
-    @Override
     public TemperatureDTO getFirstRecord() {
         return temperatureDAO.getFirstRecord();
     }
@@ -31,10 +27,5 @@ public class TemperatureServImpl implements TemperatureService {
     @Override
     public TemperatureDTO getLastRecord() {
         return temperatureDAO.getLastRecord();
-    }
-
-    @Override
-    public List<TemperatureDTO> getDataDuringPreviousPeriod(TimePeriod period) {
-        return temperatureDAO.getTemperaturesDuringSomePeriod(period);
     }
 }

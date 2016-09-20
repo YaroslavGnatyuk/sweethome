@@ -33,6 +33,6 @@ public class TestTimePeriod {
         System.out.println("Before shifting" + hour.toString());
         hour.shiftBackwardByOneHour();
         System.out.println("After shifting" + hour.toString());
-        System.out.println(temperatureService.getDataDuringNextPeriod(hour).toString());
+        System.out.println(temperatureService.getTemperatureDuringSomePeriod(hour).toString());
     }
 }

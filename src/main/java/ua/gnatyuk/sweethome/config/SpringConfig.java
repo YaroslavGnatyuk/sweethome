@@ -12,6 +12,7 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import ua.gnatyuk.sweethome.aspect.AppLogger;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -50,5 +51,10 @@ public class SpringConfig {
     @Bean
     public PlatformTransactionManager txManager() {
         return new HibernateTransactionManager(sessionFactory().getObject());
+    }
+
+    @Bean
+    public AppLogger appLogger(){
+        return new AppLogger();
     }
 }

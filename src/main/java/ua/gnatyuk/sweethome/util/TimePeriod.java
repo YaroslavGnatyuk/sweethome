@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 @ToString
 @EqualsAndHashCode
-@AllArgsConstructor()
+@AllArgsConstructor
 @NoArgsConstructor
 public class TimePeriod {
     @Getter@Setter private LocalDateTime begin;
