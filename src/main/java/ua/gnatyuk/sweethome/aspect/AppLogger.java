@@ -8,10 +8,11 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @Aspect
 @EnableAspectJAutoProxy
 public class AppLogger {
-    private static Logger log = Logger.getLogger(AppLogger.class.getName());
+    private static Logger logger = Logger.getLogger(AppLogger.class.getName());
 
-    @Before(value = "execution(* ua.gnatyuk.sweethome.controller.JSONController.getDataPerSomePeriod(..))")
+    @Before(value = "execution(* ua.gnatyuk.sweethome.service.serviceImpl.TemperatureServImpl.getTemperatureDuringSomePeriodBackward())")
     public void logBefore(){
-        log.info("Move to ...");
+        logger.info("Move forward ...");
+        System.out.println("forward");
     }
 }

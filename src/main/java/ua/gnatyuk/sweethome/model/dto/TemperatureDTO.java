@@ -1,5 +1,7 @@
 package ua.gnatyuk.sweethome.model.dto;
 
+//TODO I think I should use template Builder instead of simple constructor with many parameters or setters
+
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 

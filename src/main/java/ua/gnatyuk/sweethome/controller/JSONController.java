@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ua.gnatyuk.sweethome.model.dto.TemperatureDTO;
 import ua.gnatyuk.sweethome.service.TemperatureService;
-import ua.gnatyuk.sweethome.util.TimePeriod;
+import ua.gnatyuk.sweethome.util.period.ChartPeriod;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,15 +26,15 @@ public class JSONController {
 
     @Autowired
     @Qualifier(value = "timePeriodOneHour")
-    TimePeriod hour;
+    ChartPeriod hour;
 
     @Autowired
     @Qualifier(value = "timePeriodOneDay")
-    TimePeriod day;
+    ChartPeriod day;
 
     @Autowired
     @Qualifier(value = "timePeriodOneMonth")
-    TimePeriod month;
+    ChartPeriod month;
 
     //    @CrossOrigin(origins = "*")
     @RequestMapping(path = "/lastrecord", method = RequestMethod.GET)
@@ -54,68 +53,23 @@ public class JSONController {
             case ("onehour"): {
                 switch (direction) {
                     case ("current"): {
-                        resetAllPeriods();
+                        hour.resetPeriod();
                         return temperatureService.getTemperatureDuringSomePeriod(hour);
                     }
-
                     case ("fastbackward"): {
-                        hour.shiftFastBackwardByOneHour();
-                        List<TemperatureDTO> timePeriodWithData =
-                                temperatureService.getTemperatureDuringSomePeriod(hour);
-                        if (!timePeriodWithData.isEmpty()) {
-                            return timePeriodWithData;
-                        } else {
-                            hour.shiftFastForwardByOneHour();
-                            return temperatureService.getTemperatureDuringSomePeriod(hour);
-                        }
+                        temperatureService.getTemperatureDuringSomePeriodBackward(hour);
+                        return temperatureService.getTemperatureDuringSomePeriodBackward(hour);
                     }
-
-                    case ("backward"): {                    //was changed
-                        TemperatureDTO firstInPeriod = temperatureService
-                                .getTemperatureDuringSomePeriod(hour)
-                                .get(0);
-                        if(firstInPeriod.equals(temperatureService.getFirstRecord())) {
-                            return temperatureService.getTemperatureDuringSomePeriod(hour);
-                        }
-
-                        List<TemperatureDTO> timePeriodWithData;
-                        do{
-                            hour.shiftBackwardByOneHour();
-                            timePeriodWithData = temperatureService.getTemperatureDuringSomePeriod(hour);
-                        }while(timePeriodWithData.isEmpty());
-
-                        return timePeriodWithData;
+                    case ("backward"): {
+                        return temperatureService.getTemperatureDuringSomePeriodBackward(hour);
                     }
-
-                    case ("forward"): {                      //was changed
-                        List<TemperatureDTO> timePeriodWithData = temperatureService
-                                .getTemperatureDuringSomePeriod(hour);
-
-                        TemperatureDTO lastInPeriod = timePeriodWithData.get(timePeriodWithData.size()-1);
-                        if(lastInPeriod.equals(temperatureService.getLastRecord())) {
-                            return temperatureService.getTemperatureDuringSomePeriod(hour);
-                        }
-
-                        do {
-                            hour.shiftForwardByOneHour();
-                            timePeriodWithData = temperatureService.getTemperatureDuringSomePeriod(hour);
-                        }while(timePeriodWithData.isEmpty());
-
-                        return timePeriodWithData;
+                    case ("forward"): {
+                        return temperatureService.getTemperatureDuringSomePeriodForward(hour);
                     }
-
                     case ("fastforward"): {
-                        hour.shiftFastForwardByOneHour();
-                        List<TemperatureDTO> timePeriodWithData =
-                                temperatureService.getTemperatureDuringSomePeriod(hour);
-                        if (!timePeriodWithData.isEmpty()) {
-                            return timePeriodWithData;
-                        } else {
-                            hour.shiftFastBackwardByOneHour();
-                            return temperatureService.getTemperatureDuringSomePeriod(hour);
-                        }
+                        temperatureService.getTemperatureDuringSomePeriodForward(hour);
+                        return temperatureService.getTemperatureDuringSomePeriodForward(hour);
                     }
-
                     default:
                         throw new NullPointerException("This address doesn't serve");
                 }
@@ -124,68 +78,23 @@ public class JSONController {
             case ("oneday"): {
                 switch (direction) {
                     case ("current"): {
-                        resetAllPeriods();
+                        day.resetPeriod();
                         return temperatureService.getTemperatureDuringSomePeriod(day);
                     }
-
                     case ("fastbackward"): {
-                        day.shiftFastBackwardByOneDay();
-                        List<TemperatureDTO> timePeriodWithData =
-                                temperatureService.getTemperatureDuringSomePeriod(day);
-                        if (!timePeriodWithData.isEmpty()) {
-                            return timePeriodWithData;
-                        } else {
-                            day.shiftFastForwardByOneDay();
-                            return temperatureService.getTemperatureDuringSomePeriod(day);
-                        }
+                        temperatureService.getTemperatureDuringSomePeriodBackward(day);
+                        return temperatureService.getTemperatureDuringSomePeriodBackward(day);
                     }
-
                     case ("backward"): {
-                        TemperatureDTO firstInPeriod = temperatureService
-                                .getTemperatureDuringSomePeriod(day)
-                                .get(0);
-                        if(firstInPeriod.equals(temperatureService.getFirstRecord())) {
-                            return temperatureService.getTemperatureDuringSomePeriod(day);
-                        }
-
-                        List<TemperatureDTO> timePeriodWithData;
-                        do{
-                            day.shiftBackwardByOneDay();
-                            timePeriodWithData = temperatureService.getTemperatureDuringSomePeriod(day);
-                        }while(timePeriodWithData.isEmpty());
-
-                        return timePeriodWithData;
+                        return temperatureService.getTemperatureDuringSomePeriodBackward(day);
                     }
-
                     case ("forward"): {
-                        List<TemperatureDTO> timePeriodWithData = temperatureService
-                                .getTemperatureDuringSomePeriod(day);
-                        TemperatureDTO lastInPeriod = timePeriodWithData.get(timePeriodWithData.size()-1);
-
-                        if(lastInPeriod.equals(temperatureService.getLastRecord())) {
-                            return temperatureService.getTemperatureDuringSomePeriod(day);
-                        }
-
-                        do {
-                            day.shiftForwardByOneDay();
-                            timePeriodWithData = temperatureService.getTemperatureDuringSomePeriod(day);
-                        }while(timePeriodWithData.isEmpty());
-
-                        return timePeriodWithData;
+                        return temperatureService.getTemperatureDuringSomePeriodForward(day);
                     }
-
                     case ("fastforward"): {
-                        day.shiftFastForwardByOneDay();
-                        List<TemperatureDTO> timePeriodWithData =
-                                temperatureService.getTemperatureDuringSomePeriod(day);
-                        if (!timePeriodWithData.isEmpty()) {
-                            return timePeriodWithData;
-                        } else {
-                            day.shiftFastBackwardByOneDay();
-                            return temperatureService.getTemperatureDuringSomePeriod(day);
-                        }
+                        temperatureService.getTemperatureDuringSomePeriodForward(day);
+                        return temperatureService.getTemperatureDuringSomePeriodForward(day);
                     }
-
                     default:
                         throw new NullPointerException("This address doesn't serve");
                 }
@@ -194,131 +103,39 @@ public class JSONController {
             case ("onemonth"): {
                 switch (direction) {
                     case ("current"): {
-                        resetAllPeriods();
-                        return trimDataPerMonth(temperatureService
+                        month.resetPeriod();
+                        return filter(temperatureService
                                 .getTemperatureDuringSomePeriod(month));
                     }
-
                     case ("fastbackward"): {
-                        month.shiftFastBackwardByOneMonth();
-
-                        List<TemperatureDTO> timePeriodWithData =
-                                trimDataPerMonth(temperatureService.getTemperatureDuringSomePeriod(month));
-                        if (!timePeriodWithData.isEmpty()) {
-                            return timePeriodWithData;
-                        } else {
-                            month.shiftFastForwardByOneMonth();
-                            return trimDataPerMonth(temperatureService
-                                    .getTemperatureDuringSomePeriod(month));
-                        }
+                        temperatureService.getTemperatureDuringSomePeriodBackward(month);
+                        return filter(temperatureService.getTemperatureDuringSomePeriodBackward(month));
                     }
-
                     case ("backward"): {
-                        TemperatureDTO firstInPeriod = temperatureService
-                                .getTemperatureDuringSomePeriod(month)
-                                .get(0);
-                        if(firstInPeriod.equals(temperatureService.getFirstRecord())) {
-                            return temperatureService.getTemperatureDuringSomePeriod(month);
-                        }
-
-                        List<TemperatureDTO> timePeriodWithData;
-                        do{
-                            month.shiftBackwardByOneMonth();
-                            timePeriodWithData = temperatureService.getTemperatureDuringSomePeriod(month);
-                        }while(timePeriodWithData.isEmpty());
-
-                        return timePeriodWithData;
+                       return filter(temperatureService.getTemperatureDuringSomePeriodBackward(month));
                     }
-
                     case ("forward"): {
-                        List<TemperatureDTO> timePeriodWithData = temperatureService
-                                .getTemperatureDuringSomePeriod(month);
-                        TemperatureDTO lastInPeriod = timePeriodWithData.get(timePeriodWithData.size()-1);
-
-                        if(lastInPeriod.equals(temperatureService.getLastRecord())) {
-                            return temperatureService.getTemperatureDuringSomePeriod(month);
-                        }
-
-                        do {
-                            month.shiftForwardByOneMonth();
-                            timePeriodWithData = temperatureService.getTemperatureDuringSomePeriod(month);
-                        }while(timePeriodWithData.isEmpty());
-
-                        return timePeriodWithData;
+                       return filter(temperatureService.getTemperatureDuringSomePeriodForward(month));
                     }
-
                     case ("fastforward"): {
-                        day.shiftFastForwardByOneMonth();
-
-                        List<TemperatureDTO> timePeriodWithData =
-                                trimDataPerMonth(temperatureService.getTemperatureDuringSomePeriod(month));
-                        if (!timePeriodWithData.isEmpty()) {
-                            return timePeriodWithData;
-                        } else {
-                            month.shiftFastBackwardByOneMonth();
-                            return trimDataPerMonth(temperatureService
-                                    .getTemperatureDuringSomePeriod(month));
-                        }
+                        temperatureService.getTemperatureDuringSomePeriodForward(month);
+                        return filter(temperatureService.getTemperatureDuringSomePeriodForward(month));
                     }
-
                     default:
                         throw new NullPointerException("This address doesn't serve");
                 }
             }
         }
-
-        return null;
+        return new ArrayList<>();
     }
 
-    private List<TemperatureDTO> trimDataPerMonth(List<TemperatureDTO> data) {
-        List<TemperatureDTO> temp = new ArrayList<>();
+    private List<TemperatureDTO> filter(List<TemperatureDTO> data) {
+        List<TemperatureDTO> month = new ArrayList<>();
         for (int i = 0; i < data.size(); i++) {
             if (i % 20 == 0) {
-                temp.add(data.get(i));
+                month.add(data.get(i));
             }
         }
-        return temp;
-    }
-
-    private void resetAllPeriods(){
-        LocalDateTime begin = LocalDateTime.now();
-        begin = begin
-                .minusMinutes(begin.getMinute())
-                .minusSeconds(begin.getSecond());
-
-        LocalDateTime end = LocalDateTime.now();
-        end = end
-                .plusHours(1)
-                .minusMinutes(end.getMinute());
-        hour.setBegin(begin);
-        hour.setEnd(end);
-
-        begin = begin
-                .minusHours(begin.getHour())
-                .minusMinutes(begin.getMinute())
-                .minusSeconds(begin.getSecond());
-
-        end = end
-                .plusDays(1L)
-                .minusHours(end.getHour())
-                .minusMinutes(end.getMinute())
-                .minusSeconds(end.getSecond());
-        day.setBegin(begin);
-        day.setEnd(end);
-
-        begin = begin
-                .minusDays(begin.getDayOfMonth()-1L)
-                .minusHours(begin.getHour())
-                .minusMinutes(begin.getMinute())
-                .minusSeconds(begin.getSecond());
-
-        end = end
-                .minusDays(end.getDayOfMonth()-1L)
-                .plusMonths(1L)
-                .minusHours(end.getHour())
-                .minusMinutes(end.getMinute())
-                .minusSeconds(end.getSecond());
-        month.setBegin(begin);
-        month.setEnd(end);
+        return month;
     }
 }

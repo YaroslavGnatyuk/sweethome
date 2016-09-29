@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ua.gnatyuk.sweethome.config.SpringConfig;
 import ua.gnatyuk.sweethome.model.dto.TemperatureDTO;
 import ua.gnatyuk.sweethome.service.TemperatureService;
-import ua.gnatyuk.sweethome.util.TimePeriod;
+import ua.gnatyuk.sweethome.util.period.ChartPeriod;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ public class TestControllerJson {
     TemperatureService temperatureService;
     @Autowired
     @Qualifier(value = "timePeriodOneMonth")
-    TimePeriod month;
+    ChartPeriod month;
 
     @Test
     public void testTrimData(){

@@ -8,7 +8,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-import ua.gnatyuk.sweethome.util.*;
+import ua.gnatyuk.sweethome.util.period.ChartPeriod;
+import ua.gnatyuk.sweethome.util.period.LengthOfPeriod;
 
 import java.time.LocalDateTime;
 
@@ -44,7 +45,7 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
 
     @Bean(name = "timePeriodOneHour")
     @Scope(value = WebApplicationContext.SCOPE_SESSION,proxyMode = ScopedProxyMode.TARGET_CLASS)
-    public TimePeriod getTimePeriodOneHour(){
+    public ChartPeriod getTimePeriodOneHour(){
 
         LocalDateTime begin = LocalDateTime.now();
         begin = begin
@@ -56,12 +57,12 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
                 .plusHours(1)
                 .minusMinutes(end.getMinute());
 
-        return new TimePeriod(begin,end);
+        return new ChartPeriod(begin,end, LengthOfPeriod.HOUR);
     }
 
     @Bean(name = "timePeriodOneDay")
     @Scope(value = WebApplicationContext.SCOPE_SESSION,   proxyMode = ScopedProxyMode.TARGET_CLASS)
-    public TimePeriod getTimePeriodOneDay(){
+    public ChartPeriod getTimePeriodOneDay(){
 
         LocalDateTime begin = LocalDateTime.now();
         begin = begin
@@ -76,12 +77,12 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
                 .minusMinutes(end.getMinute())
                 .minusSeconds(end.getSecond());
 
-        return new TimePeriod(begin,end);
+        return new ChartPeriod(begin,end, LengthOfPeriod.DAY);
     }
 
     @Bean(name = "timePeriodOneMonth")
     @Scope(value = WebApplicationContext.SCOPE_SESSION,   proxyMode = ScopedProxyMode.TARGET_CLASS)
-    public TimePeriod getTimePeriodOneMonth(){
+    public ChartPeriod getTimePeriodOneMonth(){
 
         LocalDateTime begin = LocalDateTime.now();
         begin = begin
@@ -98,6 +99,6 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
                 .minusMinutes(end.getMinute())
                 .minusSeconds(end.getSecond());
 
-        return new TimePeriod(begin,end);
+        return new ChartPeriod(begin,end, LengthOfPeriod.MONTH);
     }
 }
