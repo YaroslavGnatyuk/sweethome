@@ -15,4 +15,9 @@ public class PagesController {
         return "index";
     }
 
+    @RequestMapping(path = {"/login"},method = RequestMethod.GET)
+    public String loginPage(){
+        return "login";
+    }
+
 }

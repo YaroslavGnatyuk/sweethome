@@ -5,6 +5,8 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
+import java.nio.file.Files;
+
 //TODO I should complete development aspect for logging user actions!1. Aspect is working:)!!!
 @Aspect
 @EnableAspectJAutoProxy
@@ -14,6 +16,7 @@ public class AppLogger {
     @Before(value = "execution(* ua.gnatyuk.sweethome.service.TemperatureService.getTemperatureDuringSomePeriodForward(..))")
     public void logBefore(){
         logger.info("user move forward -> ");
+        Files.;
         System.out.println("\n\nFORWARD\n\n");
     }
 }

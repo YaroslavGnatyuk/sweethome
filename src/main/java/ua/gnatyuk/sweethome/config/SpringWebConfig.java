@@ -7,7 +7,6 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
-
 import ua.gnatyuk.sweethome.util.period.ChartPeriod;
 import ua.gnatyuk.sweethome.util.period.LengthOfPeriod;
 
@@ -19,18 +18,20 @@ import java.time.LocalDateTime;
 @Import({SpringConfig.class})
 public class SpringWebConfig extends WebMvcConfigurerAdapter {
 
+   /* @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        super.addViewControllers(registry);
+
+        registry.addViewController("/login");
+        registry.addViewController("/index");
+    }*/
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-
         registry
                 .addResourceHandler("/resources/**")
                 .addResourceLocations("/resources/")
                 .setCachePeriod(31556926);
-
-        if (!registry.hasMappingForPattern("/webjars/**")) {
-            registry.addResourceHandler("/webjars/**").addResourceLocations(
-                    "classpath:/META-INF/resources/webjars/");
-        }
     }
 
     @Bean

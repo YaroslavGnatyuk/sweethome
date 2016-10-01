@@ -103,6 +103,10 @@
                             </ul>
                         </li>
 
+                        <div class="navbar-header active" id = "exit" align="right">
+                            <a class="navbar-brand" href="/sweethome/login?logout">Exit</a>
+                        </div>
+
                     </ul>
                 </div>
             </nav>
