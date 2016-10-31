@@ -13,14 +13,5 @@ public interface TemperatureService {
     TemperatureDTO getLastRecord();
     TemperatureDTO getFirstRecord();
 
-    TemperatureDTO getMaxTemperaturePerYearInTheHall(ChartPeriod period);
-    TemperatureDTO getMinTemperaturePerYearInTheHall(ChartPeriod period);
-
-    TemperatureDTO getMaxTemperaturePerYearInTheKitchen(ChartPeriod period);
-    TemperatureDTO getMinTemperaturePerYearInTheKitchen(ChartPeriod period);
-
-    TemperatureDTO getMaxTemperaturePerYearOutside(ChartPeriod period);
-    TemperatureDTO getMinTemperaturePerYearOutside(ChartPeriod period);
-
     List<TemperatureDTO> allMinAndMaxPerPeriod(ChartPeriod period);
 }

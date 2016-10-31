@@ -20,10 +20,10 @@
         <script type="text/javascript" src= "<c:url value="/resources/js/zingchart_branded_version_2.4.1/zingchart.min.js"/>"></script>
 
         <script type="text/javascript" src="<c:url value="/resources/js/myscripts/navigation_bar.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/myscripts/paint_chart.v1.002.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/myscripts/paint_chart.v1.003.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/myscripts/config_chart.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/myscripts/set_period.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/myscripts/buttons.v1.011.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/myscripts/buttons.v1.012.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/myscripts/lastRecord.v1.001.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/jquery/jquery-ui.min.js"/>"></script>
 
@@ -104,7 +104,7 @@
                         </li>
 
                         <div class="navbar-header active" id = "exit" align="right">
-                            <a class="navbar-brand" href="/sweethome/login?logout">Exit</a>
+                            <a class="navbar-brand" href="<c:url value="/logout" />">Exit</a>
                         </div>
 
                     </ul>

@@ -79,175 +79,10 @@ public class TemperatureDaoImpl implements TemperatureDAO {
 
     @Override
     @Transactional(readOnly = true)
-    public TemperatureDTO getMaxTemperatureHallPerYear(ChartPeriod year) {
-        LocalDateTime begin = year.getBegin()
-                .minusMonths(year.getBegin().getMonthValue())
-                .minusDays(year.getBegin().getDayOfMonth())
-                .minusHours(year.getBegin().getHour())
-                .minusMinutes(year.getBegin().getMinute())
-                .minusSeconds(year.getBegin().getSecond());
-        LocalDateTime end = begin.plusYears(1);
+    public List<TemperatureDTO> getAllMaxAndMinParameters(ChartPeriod period){
 
-        Timestamp beginPeriod = Timestamp.valueOf(begin);
-        Timestamp endPeriod = Timestamp.valueOf(end);
-
-        Temperature temperature = (Temperature) sessionFactory
-                .getCurrentSession()
-                .createQuery("FROM Temperature s WHERE s.temperatureInside1 BETWEEN 10 AND 50 AND s.date BETWEEN :beginPeriod AND :endPeriod" +
-                        " ORDER BY s.temperatureInside1 DESC")
-                .setParameter("beginPeriod", beginPeriod)
-                .setParameter("endPeriod", endPeriod)
-                .list()
-                .get(0);
-
-        return  EntityToDTOConverter.convertTemperatureToTemperatureDTO(temperature);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public TemperatureDTO getMinTemperatureHallPerYear(ChartPeriod year) {
-        LocalDateTime begin = year.getBegin()
-                .minusMonths(year.getBegin().getMonthValue())
-                .minusDays(year.getBegin().getDayOfMonth())
-                .minusHours(year.getBegin().getHour())
-                .minusMinutes(year.getBegin().getMinute())
-                .minusSeconds(year.getBegin().getSecond());
-        LocalDateTime end = begin.plusYears(1);
-
-        Timestamp beginPeriod = Timestamp.valueOf(begin);
-        Timestamp endPeriod = Timestamp.valueOf(end);
-
-        Temperature temperature = (Temperature) sessionFactory
-                .getCurrentSession()
-                .createQuery("FROM Temperature s WHERE s.temperatureInside1 BETWEEN 10 AND 50 AND s.date BETWEEN :beginPeriod AND :endPeriod" +
-                        " ORDER BY s.temperatureInside1 ASC")
-                .setParameter("beginPeriod", beginPeriod)
-                .setParameter("endPeriod", endPeriod)
-                .list()
-                .get(0);
-
-        return  EntityToDTOConverter.convertTemperatureToTemperatureDTO(temperature);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public TemperatureDTO getMaxTemperatureKitchenPerYear(ChartPeriod year) {
-        LocalDateTime begin = year.getBegin()
-                .minusMonths(year.getBegin().getMonthValue())
-                .minusDays(year.getBegin().getDayOfMonth())
-                .minusHours(year.getBegin().getHour())
-                .minusMinutes(year.getBegin().getMinute())
-                .minusSeconds(year.getBegin().getSecond());
-        LocalDateTime end = begin.plusYears(1);
-
-        Timestamp beginPeriod = Timestamp.valueOf(begin);
-        Timestamp endPeriod = Timestamp.valueOf(end);
-
-        Temperature temperature = (Temperature) sessionFactory
-                .getCurrentSession()
-                .createQuery("FROM Temperature s WHERE s.temperatureInside2 BETWEEN 10 AND 50 AND s.date BETWEEN :beginPeriod AND :endPeriod" +
-                        " ORDER BY s.temperatureInside2 DESC")
-                .setParameter("beginPeriod", beginPeriod)
-                .setParameter("endPeriod", endPeriod)
-                .list()
-                .get(0);
-
-        return  EntityToDTOConverter.convertTemperatureToTemperatureDTO(temperature);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public TemperatureDTO getMinTemperatureKitchenPerYear(ChartPeriod year) {
-        LocalDateTime begin = year.getBegin()
-                .minusMonths(year.getBegin().getMonthValue())
-                .minusDays(year.getBegin().getDayOfMonth())
-                .minusHours(year.getBegin().getHour())
-                .minusMinutes(year.getBegin().getMinute())
-                .minusSeconds(year.getBegin().getSecond());
-        LocalDateTime end = begin.plusYears(1);
-
-        Timestamp beginPeriod = Timestamp.valueOf(begin);
-        Timestamp endPeriod = Timestamp.valueOf(end);
-
-        Temperature temperature = (Temperature) sessionFactory
-                .getCurrentSession()
-                .createQuery("FROM Temperature s WHERE s.temperatureInside2 BETWEEN 10 AND 50 AND s.date BETWEEN :beginPeriod AND :endPeriod" +
-                        " ORDER BY s.temperatureInside2 ASC")
-                .setParameter("beginPeriod", beginPeriod)
-                .setParameter("endPeriod", endPeriod)
-                .list()
-                .get(0);
-
-        return  EntityToDTOConverter.convertTemperatureToTemperatureDTO(temperature);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public TemperatureDTO getMaxTemperatureOutsidePerYear(ChartPeriod year) {
-        LocalDateTime begin = year.getBegin()
-                .minusMonths(year.getBegin().getMonthValue())
-                .minusDays(year.getBegin().getDayOfMonth())
-                .minusHours(year.getBegin().getHour())
-                .minusMinutes(year.getBegin().getMinute())
-                .minusSeconds(year.getBegin().getSecond());
-        LocalDateTime end = begin.plusYears(1);
-
-        Timestamp beginPeriod = Timestamp.valueOf(begin);
-        Timestamp endPeriod = Timestamp.valueOf(end);
-
-        Temperature temperature = (Temperature) sessionFactory
-                .getCurrentSession()
-                .createQuery("FROM Temperature s WHERE s.temperatureOutside BETWEEN 10 AND 50 AND s.date BETWEEN :beginPeriod AND :endPeriod" +
-                        " ORDER BY s.temperatureOutside DESC ")
-                .setParameter("beginPeriod", beginPeriod)
-                .setParameter("endPeriod", endPeriod)
-                .list()
-                .get(0);
-
-        return  EntityToDTOConverter.convertTemperatureToTemperatureDTO(temperature);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public TemperatureDTO getMinTemperatureOutsidePerYear(ChartPeriod year) {
-        LocalDateTime begin = year.getBegin()
-                .minusMonths(year.getBegin().getMonthValue())
-                .minusDays(year.getBegin().getDayOfMonth())
-                .minusHours(year.getBegin().getHour())
-                .minusMinutes(year.getBegin().getMinute())
-                .minusSeconds(year.getBegin().getSecond());
-        LocalDateTime end = begin.plusYears(1);
-
-        Timestamp beginPeriod = Timestamp.valueOf(begin);
-        Timestamp endPeriod = Timestamp.valueOf(end);
-
-        Temperature temperature = (Temperature) sessionFactory
-                .getCurrentSession()
-                .createQuery("FROM Temperature s WHERE s.temperatureOutside BETWEEN 10 AND 50 AND s.date BETWEEN :beginPeriod AND :endPeriod" +
-                        " ORDER BY s.temperatureOutside ASC")
-                .setParameter("beginPeriod", beginPeriod)
-                .setParameter("endPeriod", endPeriod)
-                .list()
-                .get(0);
-
-        return  EntityToDTOConverter.convertTemperatureToTemperatureDTO(temperature);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public TemperatureDTO getMaxPressurePerYear(ChartPeriod year) {
-        return null;
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public TemperatureDTO getMinPressurePerYear(ChartPeriod year) {
-        return null;
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<TemperatureDTO> getallMaxAndMinParameters(ChartPeriod period){
+        Comparator<Temperature> compareTemperatureInTheKitchen = (a,b)->a.getTemperatureInside2().compareTo(b.getTemperatureInside2());
+        Comparator<Temperature> comparePressure = (a,b)->a.getBarPressure().compareTo(b.getBarPressure());
 
         List<TemperatureDTO> listOfMaxAndMin = new ArrayList<>(8);
 
@@ -263,16 +98,11 @@ public class TemperatureDaoImpl implements TemperatureDAO {
         Timestamp beginPeriod = Timestamp.valueOf(begin);
         Timestamp endPeriod = Timestamp.valueOf(end);
 
-        System.out.println("\n" + System.currentTimeMillis()/1000);
         List<Temperature> outside = (List<Temperature>) session.createQuery("FROM Temperature s WHERE s.temperatureOutside BETWEEN 10 AND 50 AND s.date BETWEEN :beginPeriod AND :endPeriod" +
                 " ORDER BY s.temperatureOutside ASC")
                 .setParameter("beginPeriod", beginPeriod)
                 .setParameter("endPeriod", endPeriod)
                 .list();
-        System.out.println("\n" + System.currentTimeMillis()/1000);
-
-        Comparator<Temperature> compareTemperatureInTheKitchen = (a,b)->a.getTemperatureInside2().compareTo(b.getTemperatureInside2());
-        Comparator<Temperature> comparePressure = (a,b)->a.getBarPressure().compareTo(b.getBarPressure());
 
         listOfMaxAndMin.add(EntityToDTOConverter.convertTemperatureToTemperatureDTO(outside.get(0)));
         listOfMaxAndMin.add(EntityToDTOConverter.convertTemperatureToTemperatureDTO(outside.get(outside.size()-1)));

@@ -265,7 +265,7 @@ $(function(){
             complete:function(xhr){
                 if (xhr.readyState==4){
                     var scaleForTemperature = "-30:50:5";
-                    var scaleForPressure = "740:770:5";
+                    var scaleForPressure = "730:780:5";
 
                     hideGifLoading();
 

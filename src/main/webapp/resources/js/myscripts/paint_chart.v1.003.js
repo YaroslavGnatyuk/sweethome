@@ -249,8 +249,7 @@ $(function(){
             complete:function(xhr){
                 if (xhr.readyState==4){
                     var scaleForTemperature = "-30:50:5";
-                    var scaleForPressure = "740:770:5";
-                    var scaleForAllParameters = "-30:770:5";
+                    var scaleForPressure = "730:780:5";
 
                     hideGifLoading();
 
@@ -267,11 +266,6 @@ $(function(){
                     if(currentParameter.localeCompare("pressure") == 0) {
                         painChart(stockState.dates, stockState.temp1, stockState.temp2,
                             stockState.tempOutside, stockState.pressure,scaleForPressure);
-                    }
-
-                    if(currentParameter.localeCompare("all") == 0) {
-                        painChart(stockState.dates, stockState.temp1, stockState.temp2,
-                            stockState.tempOutside, stockState.pressure,scaleForAllParameters);
                     }
 
                     clearArrays();

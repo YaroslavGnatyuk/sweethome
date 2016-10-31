@@ -2,13 +2,17 @@ package ua.gnatyuk.sweethome.model.dto;
 
 //TODO I think I should use template Builder instead of simple constructor with many parameters or setters
 
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.sql.Timestamp;
 
 @ToString
 @EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 public class TemperatureDTO {
     private Integer id;
     private Timestamp date;

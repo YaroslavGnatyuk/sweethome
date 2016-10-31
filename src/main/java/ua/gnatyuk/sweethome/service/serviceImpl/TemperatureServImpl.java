@@ -8,6 +8,8 @@ import ua.gnatyuk.sweethome.service.TemperatureService;
 import ua.gnatyuk.sweethome.util.period.ChartPeriod;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class TemperatureServImpl implements TemperatureService {
@@ -16,7 +18,7 @@ public class TemperatureServImpl implements TemperatureService {
 
     @Override
     public List<TemperatureDTO> getTemperatureDuringSomePeriod(ChartPeriod period) {
-        return temperatureDAO.getTemperaturesDuringSomePeriod(period);
+        return filterIncorrectRecords(temperatureDAO.getTemperaturesDuringSomePeriod(period).stream());
     }
 
     @Override
@@ -34,7 +36,7 @@ public class TemperatureServImpl implements TemperatureService {
             timePeriodWithData = temperatureDAO.getTemperaturesDuringSomePeriod(period);
         }while(timePeriodWithData.isEmpty());
 
-        return timePeriodWithData;
+        return filterIncorrectRecords(timePeriodWithData.stream());
     }
 
     @Override
@@ -49,7 +51,15 @@ public class TemperatureServImpl implements TemperatureService {
             timePeriodWithData = temperatureDAO.getTemperaturesDuringSomePeriod(period);
         }while(timePeriodWithData.isEmpty());
 
-        return timePeriodWithData;
+        return filterIncorrectRecords(timePeriodWithData.stream());
+    }
+
+    private List<TemperatureDTO> filterIncorrectRecords(Stream<TemperatureDTO> dtoStream){
+        return dtoStream.filter(x->x.getBarPressure()>730 && x.getBarPressure()<780)
+                .filter(x->x.getTemperatureInside1()>-30 && x.getTemperatureInside1()<50)
+                .filter(x->x.getTemperatureInside2()>-30 && x.getTemperatureInside2()<50)
+                .filter(x->x.getTemperatureOutside()>-30 && x.getTemperatureOutside()<50)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -63,37 +73,7 @@ public class TemperatureServImpl implements TemperatureService {
     }
 
     @Override
-    public TemperatureDTO getMaxTemperaturePerYearInTheHall(ChartPeriod period) {
-        return temperatureDAO.getMaxTemperatureHallPerYear(period);
-    }
-
-    @Override
-    public TemperatureDTO getMinTemperaturePerYearInTheHall(ChartPeriod period) {
-        return temperatureDAO.getMinTemperatureHallPerYear(period);
-    }
-
-    @Override
-    public TemperatureDTO getMaxTemperaturePerYearInTheKitchen(ChartPeriod period) {
-        return temperatureDAO.getMaxTemperatureKitchenPerYear(period);
-    }
-
-    @Override
-    public TemperatureDTO getMinTemperaturePerYearInTheKitchen(ChartPeriod period) {
-        return temperatureDAO.getMinTemperatureKitchenPerYear(period);
-    }
-
-    @Override
-    public TemperatureDTO getMaxTemperaturePerYearOutside(ChartPeriod period) {
-        return temperatureDAO.getMaxTemperatureOutsidePerYear(period);
-    }
-
-    @Override
-    public TemperatureDTO getMinTemperaturePerYearOutside(ChartPeriod period) {
-        return temperatureDAO.getMinTemperatureOutsidePerYear(period);
-    }
-
-    @Override
     public List<TemperatureDTO> allMinAndMaxPerPeriod(ChartPeriod period) {
-        return temperatureDAO.getallMaxAndMinParameters(period);
+        return temperatureDAO.getAllMaxAndMinParameters(period);
     }
 }

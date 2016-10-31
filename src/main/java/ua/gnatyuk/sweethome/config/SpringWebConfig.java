@@ -13,18 +13,9 @@ import ua.gnatyuk.sweethome.util.period.LengthOfPeriod;
 import java.time.LocalDateTime;
 
 @Configuration
-@ComponentScan("ua.gnatyuk.sweethome")
 @EnableWebMvc
-@Import({SpringConfig.class})
+@ComponentScan("ua.gnatyuk.sweethome")
 public class SpringWebConfig extends WebMvcConfigurerAdapter {
-
-   /* @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        super.addViewControllers(registry);
-
-        registry.addViewController("/login");
-        registry.addViewController("/index");
-    }*/
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -46,7 +37,7 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
 
     @Bean(name = "timePeriodOneHour")
     @Scope(value = WebApplicationContext.SCOPE_SESSION,proxyMode = ScopedProxyMode.TARGET_CLASS)
-    public ChartPeriod getTimePeriodOneHour(){
+    public ChartPeriod currentHour(){
 
         LocalDateTime begin = LocalDateTime.now();
         begin = begin
@@ -63,7 +54,7 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
 
     @Bean(name = "timePeriodOneDay")
     @Scope(value = WebApplicationContext.SCOPE_SESSION,   proxyMode = ScopedProxyMode.TARGET_CLASS)
-    public ChartPeriod getTimePeriodOneDay(){
+    public ChartPeriod currentDay(){
 
         LocalDateTime begin = LocalDateTime.now();
         begin = begin
@@ -83,7 +74,7 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
 
     @Bean(name = "timePeriodOneMonth")
     @Scope(value = WebApplicationContext.SCOPE_SESSION,   proxyMode = ScopedProxyMode.TARGET_CLASS)
-    public ChartPeriod getTimePeriodOneMonth(){
+    public ChartPeriod currentMonth(){
 
         LocalDateTime begin = LocalDateTime.now();
         begin = begin

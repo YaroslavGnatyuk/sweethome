@@ -41,7 +41,6 @@ public class JSONController {
     @ResponseBody
     public TemperatureDTO lastRecord()
     {
-
         return temperatureService.getLastRecord();
     }
 
@@ -104,22 +103,22 @@ public class JSONController {
                 switch (direction) {
                     case ("current"): {
                         month.resetPeriod();
-                        return filter(temperatureService
+                        return filterDataPerMonth(temperatureService
                                 .getTemperatureDuringSomePeriod(month));
                     }
                     case ("fastbackward"): {
                         temperatureService.getTemperatureDuringSomePeriodBackward(month);
-                        return filter(temperatureService.getTemperatureDuringSomePeriodBackward(month));
+                        return filterDataPerMonth(temperatureService.getTemperatureDuringSomePeriodBackward(month));
                     }
                     case ("backward"): {
-                       return filter(temperatureService.getTemperatureDuringSomePeriodBackward(month));
+                       return filterDataPerMonth(temperatureService.getTemperatureDuringSomePeriodBackward(month));
                     }
                     case ("forward"): {
-                       return filter(temperatureService.getTemperatureDuringSomePeriodForward(month));
+                       return filterDataPerMonth(temperatureService.getTemperatureDuringSomePeriodForward(month));
                     }
                     case ("fastforward"): {
                         temperatureService.getTemperatureDuringSomePeriodForward(month);
-                        return filter(temperatureService.getTemperatureDuringSomePeriodForward(month));
+                        return filterDataPerMonth(temperatureService.getTemperatureDuringSomePeriodForward(month));
                     }
                     default:
                         throw new NullPointerException("This address doesn't serve");
@@ -129,7 +128,7 @@ public class JSONController {
         return new ArrayList<>();
     }
 
-    private List<TemperatureDTO> filter(List<TemperatureDTO> data) {
+    private List<TemperatureDTO> filterDataPerMonth(List<TemperatureDTO> data) {
         List<TemperatureDTO> month = new ArrayList<>();
         for (int i = 0; i < data.size(); i++) {
             if (i % 20 == 0) {
